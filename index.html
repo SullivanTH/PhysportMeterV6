@@ -5,8 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhysportMeter</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="icon" type="image/png" href="https://www.physport.ch/wp-content/uploads/2022/09/logo-blanc.svg" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    
     <style>
+        .header {
+            text-align: center; /* Centrer horizontalement le contenu */
+            background-color: #ffffff; /* Optionnel : couleur de fond */
+            padding: 5px 5px;
+        }
+
+        .header-content {
+            display: inline-block; /* Bloque tout le contenu pour un centrage vertical */
+            text-align: center; /* Centre les textes */
+        }
+
+        .header-logo {
+            max-height: 80px; /* Ajuste la taille du logo */
+            width: auto; /* Conserve les proportions */
+            margin-bottom: 10x; /* Espace entre le logo et les textes */
+        }
+
+        .header-info {
+            font-size: 14px; /* Taille du texte */
+            color: #333; /* Couleur du texte */
+        }
+
+        .header-info p {
+            margin: 5px 0; /* Espacement uniforme entre les lignes */
+        }
+
+        .header-info a {
+            color: #0066cc; /* Couleur du lien */
+            text-decoration: none; /* Supprime le soulignement */
+        }
+
+        .header-info a:hover {
+            text-decoration: underline; /* Soulignement au survol */
+        }
+
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -14,7 +52,7 @@
             background-color: #ffffff;
         }
         .container {
-            margin: 20px auto;
+            margin: 30px auto;
             max-width: 600px;
             padding: 20px;
             background: #f4f4f4;
@@ -23,115 +61,324 @@
         }
         .logo-container {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .logo-container img {
             max-width: 70%; /* Réduction de la taille du logo */
             height: auto;   /* Conserver les proportions */
         }
         .title-container {
-            text-align: center;
-            margin: 10px 0;
+          text-align: center;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700; /* Police très épaisse pour le logo */
+  font-size: 60px; /* Ajuste la taille selon tes préférences */
+  color: black; /* Ou toute autre couleur */
+}
+
+        /* Conteneur pour les éléments alignés sur la même ligne */
+        .line {
+            display: flex;                /* Affichage en ligne pour les éléments */
+            align-items: center;          /* Alignement vertical centré */
+            gap: 20px;                    /* Espace entre les éléments */
+            margin-bottom: 10px;          /* Espace sous chaque ligne */
         }
+
         .title {
             font-family: 'Arial', sans-serif;
             color: #c8102e;
             font-size: 30px; /* Augmentation de la taille du texte PhysportMeter */
-            margin: 10px 0;
+            margin: 15px 0;
         }
         label {
-            margin-top: 15px;
+            margin-top: 20px;
             font-weight: bold;
             display: block;
             color: #333;
         }
+        
         input[type="text"], input[type="date"], textarea {
-            width: 100%;
-            padding: 10px;
+            width: 80%;
+            padding: 20px;
             margin-top: 5px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 15px;
         }
         input[type="range"] {
             width: 100%;
-            margin: 10px 0;
+            margin: 20px 0;
         }
         select {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
+            padding: 15px;
+            margin-top: 7px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
         button {
             background-color: #c8102e;
             color: white;
-            padding: 10px;
+            padding: 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
             font-size: 16px;
-            margin-top: 15px;
-        }
-        button:hover {
-            background-color: #a50023;
-        }
-        .chart-container {
-            position: relative;
-            margin: 20px auto; /* Centrer le graphique */
-            height: 500px; /* Augmentation de la taille du graphique */
-            width: 100%; /* Largeur ajustée pour être plus grand */
-        }
-        .physio-note {
             margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
         }
+
+        .range-container {
+  display: flex;
+  align-items: center; /* Aligne verticalement les éléments */
+  margin-bottom: 10px; /* Ajoute de l'espace entre les éléments */
+}
+
+.range-container label {
+  margin-right: 10px; /* Ajoute de l'espace entre le label et le curseur */
+}
+
+.range-container input[type="range"] {
+  width: 60%; /* Ajuste la largeur du curseur */
+  margin-right: 10px; /* Espacement entre le curseur et le texte */
+}
+
+.range-container .note {
+  margin-right: 10px; /* Espacement entre la note et le textarea */
+}
+
+.range-container .note-textarea {
+  font-size: 16px;
+  padding: 5px;
+  width: 150px; /* Ajuste la largeur du textarea */
+  height: 40px; /* Ajuste la hauteur du textarea */
+}
+
+/* Conteneur pour aligner date et note */
+.inline-container {
+    display: flex;
+    align-items: center; /* Aligne les éléments verticalement */
+    gap: 10px; /* Espace entre les éléments */
+}
+
+.responsive-title {
+  font-size: 25px; /* Ajustez la taille à votre convenance */
+  align-items: center;
+  text-decoration: underline;
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+}
+
+
+/* Champ date */
+.inline-container input[type="date"] {
+    flex: 1; /* Permet au champ de prendre plus d'espace si nécessaire */
+}
+
+        .questions {
+  margin-top: 20px; /* Espacement entre le radar et les questions */
+}
+
+.question {
+  margin-bottom: 15px; /* Espacement entre les questions */
+}
+
+.question label {
+  font-size: 16px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.options label {
+  margin-right: 20px;
+}
+
+    .question {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .response {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    select {
+      padding: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+#myRadarChart {
+    width: 500px !important;   /* Largeur spécifique */
+    height: 500px !important;  /* Hauteur spécifique */
+      position: relative;
+            margin: 30px auto; /* Centrer le graphique */
+
+}
+
+input[type="radio"]:checked {
+  background-color: #007bff;
+}
+      
+
+#physioNote {
+    width: 600px; /* Largeur de la zone */
+    height: 50px; /* Hauteur de la zone */
+    resize: both; /* Permet à l'utilisateur de redimensionner la zone */
+    border: 1px solid #ccc; /* Bordure visible */
+    padding: 10px; /* Espacement interne pour le confort d'écriture */
+    font-size: 16px; /* Taille de la police */
+    box-sizing: border-box; /* Inclure bordures et padding dans les dimensions */
+}
+
     </style>
 </head>
+
+
 <body>
+  <header class="header">
+    <img src="https://www.physport.ch/wp-content/uploads/2022/09/logo-gris.svg" 
+         alt="Logo de Physport" 
+         class="header-logo">
+    <div class="header-info">
+        <p>Rue de Villereuse 3, Bd de la Tour 6, Genève</p>
+        <p>Tel : 0228402980</p>
+        <p>Email : <a href="mailto:info@physport.ch">info@physport.ch</a></p>
+    </div>
+</header>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+
     <div class="container">
-        <div class="logo-container">
-            <img src="https://www.physport.ch/wp-content/uploads/2022/09/logo-gris.svg" alt="Logo de Physport">
-        </div>
-        
         <div class="title-container">
             <div class="title">PhysportMeter</div>
         </div>
 
-        <label for="patientName">Nom du patient:</label>
-        <input type="text" id="patientName" required>
-        
-        <label for="date">Date:</label>
-        <input type="date" id="date" required>
+<div class="inline-container">
+      <label for="evaluation-date">Date de l'évaluation</label>
+        <input type="date" id="evaluation-date" name="evaluation-date">
+    </div>
 
-        <label for="evaluationType">Type d'évaluation :</label>
-        <select id="evaluationType" onchange="updateCriteria()">
-            <option value="traumatology">Traumatologie</option>
-            <option value="orthopedic">Orthopédie (Démonstration)</option> <!-- Juste pour la démonstration -->
-        </select>
+ <div class="line">
+        <!-- Nom du patient -->
+        <label for="patient-name">Nom du patient </label>
+        <input type="text" id="patient-name" name="patient-name" placeholder="Entrez le nom du patient">
 
-        <div id="evaluationCriteria"></div>
+        <!-- Date de naissance -->
+        <label for="birth-date">Date de naissance </label>
+        <input type="date" id="birth-date" name="birth-date">
+    </div>
 
-        <label for="chartType">Type de graphique :</label>
-        <select id="chartType">
-            <option value="bar">Graphique en Barres</option>
-            <option value="radar">Graphique en Étoile</option>
-        </select>
+    <div class="line">
+        <!-- Nom du prescripteur -->
+        <label for="prescriber-name">Nom du prescripteur </label>
+        <input type="text" id="prescriber-name" name="prescriber-name" placeholder="Entrez le nom du prescripteur" value="Dr/Dre"/>
 
-        <button onclick="displayChart()">Soumettre</button>
-        
-        <div class="chart-container">
-            <canvas id="progressChart"></canvas>
-        </div>
+        <!-- Date de prescription -->
+        <label for="prescription-date">Date de prescription </label>
+        <input type="date" id="prescription-date" name="prescription-date">
+    </div>
 
-        <label for="physioNote">Notes :</label>
+<!-- Critères d'évaluation -->
+        <h3 class="responsive-title">Critères d'évaluation</h3>
+    <form id="evaluationForm">
+
+
+  <!-- Assiduité aux séances -->
+    <div class="range-container">
+  <label for="assiduite">Assiduité aux séances </label>
+  <input type="range" id="assiduite" name="assiduite" min="0" max="10" step="1" value="5">
+  <span id="assiduiteValue" class="note">5</span><br>
+  <textarea id="assiduiteNotes" name="assiduiteNotes" placeholder="Notes sur l'assiduité..." rows="2" cols="40"></textarea><br><br>
+</div><br>
+
+  <!-- Observance du traitement -->
+    <div class="range-container">
+
+  <label for="observance">Observance du traitement </label>
+  <input type="range" id="observance" name="observance" min="0" max="10" step="1" value="5">
+  <span id="observanceValue" class="note">5</span><br>
+  <textarea id="observanceNotes" name="observanceNotes" placeholder="Notes sur l'observance..." rows="2" cols="40"></textarea><br><br>
+</div><br>
+
+  <!-- Douleur -->
+    <div class="range-container">
+
+  <label for="douleur">Douleur </label>
+  <input type="range" id="douleur" name="douleur" min="0" max="10" step="1" value="5">
+  <span id="douleurValue" class="note">5</span><br>
+  <textarea id="douleurNotes" name="douleurNotes" placeholder="Notes sur la douleur..." rows="2" cols="40"></textarea><br><br>
+</div><br>
+
+  <!-- Cutané-trophique -->
+    <div class="range-container">
+
+  <label for="cutane">Cutané-trophique </label>
+  <input type="range" id="cutane" name="cutane" min="0" max="10" step="1" value="5">
+  <span id="cutaneValue" class="note">5</span><br>
+  <textarea id="cutaneNotes" name="cutaneNotes" placeholder="Notes sur l'aspect cutané-trophique..." rows="2" cols="40"></textarea><br><br>
+</div><br>
+
+  <!-- Mobilité -->
+    <div class="range-container">
+
+  <label for="mobilite">Mobilité </label>
+  <input type="range" id="mobilite" name="mobilite" min="0" max="10" step="1" value="5">
+  <span id="mobiliteValue" class="note">5</span><br>
+  <textarea id="mobiliteNotes" name="mobiliteNotes" placeholder="Notes sur la mobilité..." rows="2" cols="40"></textarea><br><br>
+</div><br>
+
+  <!-- Force -->
+    <div class="range-container">
+
+  <label for="force">Force </label>
+  <input type="range" id="force" name="force" min="0" max="10" step="1" value="5">
+  <span id="forceValue" class="note">5</span><br>
+  <textarea id="forceNotes" name="forceNotes" placeholder="Notes sur la force..." rows="2" cols="40"></textarea><br><br>
+</div><br>
+
+  <!-- Aspect Fonctionnel -->
+    <div class="range-container">
+
+  <label for="fonctionnel">Aspect Fonctionnel </label>
+  <input type="range" id="fonctionnel" name="fonctionnel" min="0" max="10" step="1" value="5">
+  <span id="fonctionnelValue" class="note">5</span><br>
+  <textarea id="fonctionnelNotes" name="fonctionnelNotes" placeholder="Notes sur l'aspect fonctionnel..." rows="2" cols="40"></textarea><br><br>
+</div><br>
+
+</form>
+
+   <canvas id="myRadarChart" width="100" height="100"></canvas>
+
+  <!-- Première Question -->
+  <div class="question">
+    <label for="patient-opinion">Avis du patient sur la poursuite du traitement</label>
+    <select id="patient-opinion" onchange="showResponse('patient-opinion')">
+      <option value="">Oui ou Non</option>
+      <option value="oui">Oui</option>
+      <option value="non">Non</option>
+    </select>
+    <div class="response" id="response1"></div>
+  </div>
+
+  <!-- Deuxième Question -->
+  <div class="question">
+    <label for="exercise-opinion">Avis du physiothérapeute sur la poursuite du traitement</label>
+    <select id="exercise-opinion" onchange="showResponse('exercise-opinion')">
+      <option value="">Oui ou Non</option>
+      <option value="oui">Oui</option>
+      <option value="non">Non</option>
+    </select>
+    <div class="response" id="response2"></div>
+  </div>
+
+<label for="physioNote">Notes :</label>
         <textarea id="physioNote" rows="4" placeholder="Écrivez votre note ici..."></textarea>
 
-        <label for="evaluatorName">Nom de l'évaluateur :</label>
+        <label for="evaluatorName">Nom du physiothérapeute :</label>
         <select id="evaluatorName">
             <option value="Audrey Mongellaz">Audrey Mongellaz</option>
             <option value="Audrey Pitz">Audrey Pitz</option>
@@ -148,113 +395,120 @@
             <option value="Téo Junge">Téo Junge</option>
             <option value="Yves Marinoni">Yves Marinoni</option>
         </select>
-    </div>
 
-    <script>
-        let chart;
-
-        function updateCriteria() {
-            const evaluationType = document.getElementById("evaluationType").value;
-            const criteriaContainer = document.getElementById("evaluationCriteria");
-            criteriaContainer.innerHTML = "";
-
-            const traumatologyCriteria = [
-                { label: "Observance des séances", type: "range" },
-                { label: "Observance des exercices", type: "range" },
-                { label: "Douleur", type: "range" },
-                { label: "Force musculaire", type: "range" },
-                { label: "Mobilité", type: "range" },
-                { label: "Cutané-trophique", type: "range" },
-                { label: "Aspect fonctionnel (AVQ)", type: "range" }
-            ];
-
-            const criteria = evaluationType === "traumatology" ? traumatologyCriteria : [];
-
-            criteria.forEach((criterion) => {
-                const label = document.createElement("label");
-                label.innerText = criterion.label;
-                criteriaContainer.appendChild(label);
-
-                if (criterion.type === "range") {
-                    const input = document.createElement("input");
-                    input.type = "range";
-                    input.min = "0";
-                    input.max = "10";
-                    input.value = "5";
-                    input.oninput = () => label.querySelector(".value").innerText = input.value;
-                    label.appendChild(input);
-                    const valueDisplay = document.createElement("span");
-                    valueDisplay.className = "value";
-                    valueDisplay.innerText = "5";
-                    label.appendChild(valueDisplay);
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+            // Initialisation du graphique radar avec Chart.js
+            var ctx = document.getElementById('myRadarChart').getContext('2d');
+            var myRadarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Assiduité', 'Observance', 'Douleur', 'Cutané-trophique', 'Mobilité', 'Force', 'Aspect Fonctionnel'],
+                    datasets: [{
+                        label: 'Évaluation',
+                        data: [
+                            document.getElementById("assiduite").value,
+                            document.getElementById("observance").value,
+                            document.getElementById("douleur").value,
+                            document.getElementById("cutane").value,
+                            document.getElementById("mobilite").value,
+                            document.getElementById("force").value,
+                            document.getElementById("fonctionnel").value
+                        ],
+                        backgroundColor: 'rgba(255, 87, 51, 0.2)', // couleur de fond
+                        borderColor: '#FF5733', // couleur des bordures
+                        borderWidth: 2
+                    }]
+                },
+             options: {
+                    scales: {
+                        r: {
+                            min: 0, // Valeur minimale de l'échelle
+                            max: 10, // Valeur maximale de l'échelle
+                            ticks: {
+                                stepSize: 1, // Espacement entre les valeurs sur l'axe
+                                showLabelBackdrop: false, // Pas de fond pour les labels
+                                font: {
+                                    size: 14 // Taille de la police pour les labels
+                                }
+                            },
+                            grid: {
+                                color: '#ddd', // Couleur de la grille
+                                lineWidth: 1 // Largeur des lignes de la grille
+                            }
+                        }
+                    },
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top', // Position de la légende
+                            labels: {
+                                font: {
+                                    size: 14 // Taille de la police pour la légende
+                                }
+                            }
+                        }
+                    }
                 }
             });
-        }
 
-        function displayChart() {
-            const scores = Array.from(document.querySelectorAll('#evaluationCriteria input[type="range"]')).map(input => parseFloat(input.value));
-            const chartType = document.getElementById("chartType").value;
-
-            const filteredScores = scores.filter(score => !isNaN(score));
-
-            const ctx = document.getElementById("progressChart").getContext("2d");
-
-            if (chart) {
-                chart.destroy();
+            // Fonction de mise à jour du graphique
+            function updateChart() {
+                myRadarChart.data.datasets[0].data = [
+                    document.getElementById("assiduite").value,
+                    document.getElementById("observance").value,
+                    document.getElementById("douleur").value,
+                    document.getElementById("cutane").value,
+                    document.getElementById("mobilite").value,
+                    document.getElementById("force").value,
+                    document.getElementById("fonctionnel").value
+                ];
+                myRadarChart.update(); // Met à jour le graphique
             }
 
-            if (chartType === "bar") {
-                chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: Array.from(document.querySelectorAll('#evaluationCriteria label')).map(label => label.innerText),
-                        datasets: [{
-                            label: 'Scores',
-                            data: filteredScores,
-                            backgroundColor: 'rgba(200, 16, 46, 0.5)',
-                            borderColor: 'rgba(200, 16, 46, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 10 // Ajustement de l'échelle à 10
-                            }
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                });
-            } else if (chartType === "radar") {
-                chart = new Chart(ctx, {
-                    type: 'radar',
-                    data: {
-                        labels: Array.from(document.querySelectorAll('#evaluationCriteria label')).map(label => label.innerText),
-                        datasets: [{
-                            label: 'Scores',
-                            data: filteredScores,
-                            backgroundColor: 'rgba(200, 16, 46, 0.5)',
-                            borderColor: 'rgba(200, 16, 46, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            r: {
-                                beginAtZero: true,
-                                max: 10 // Ajustement de l'échelle à 10
-                            }
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                });
-            }
-        }
+            // Attacher les écouteurs d'événements pour chaque curseur
+            document.getElementById("assiduite").addEventListener("input", function() {
+                document.getElementById("assiduiteValue").textContent = this.value;
+                updateChart();
+            });
 
-        updateCriteria(); // Initialize the criteria on page load
+            document.getElementById("observance").addEventListener("input", function() {
+                document.getElementById("observanceValue").textContent = this.value;
+                updateChart();
+            });
+
+            document.getElementById("douleur").addEventListener("input", function() {
+                document.getElementById("douleurValue").textContent = this.value;
+                updateChart();
+            });
+
+            document.getElementById("cutane").addEventListener("input", function() {
+                document.getElementById("cutaneValue").textContent = this.value;
+                updateChart();
+            });
+
+            document.getElementById("mobilite").addEventListener("input", function() {
+                document.getElementById("mobiliteValue").textContent = this.value;
+                updateChart();
+            });
+
+            document.getElementById("force").addEventListener("input", function() {
+                document.getElementById("forceValue").textContent = this.value;
+                updateChart();
+            });
+
+            document.getElementById("fonctionnel").addEventListener("input", function() {
+                document.getElementById("fonctionnelValue").textContent = this.value;
+                updateChart();
+            });
+        });
     </script>
+
+  
 </body>
 </html>
+
+
+
+
+
