@@ -211,13 +211,22 @@ input[type="radio"] {
   margin-right: 5px;
 }
 
-#myRadarChart {
+#radarGyn {
     width: 500px !important;   /* Largeur spécifique */
     height: 500px !important;  /* Hauteur spécifique */
       position: relative;
             margin: 30px auto; /* Centrer le graphique */
 
 }
+
+#radarGeneraux {
+    width: 500px !important;   /* Largeur spécifique */
+    height: 500px !important;  /* Hauteur spécifique */
+      position: relative;
+            margin: 30px auto; /* Centrer le graphique */
+
+}
+
 
 input[type="radio"]:checked {
   background-color: #007bff;
@@ -283,75 +292,135 @@ input[type="radio"]:checked {
     </div>
 
 <!-- Critères d'évaluation -->
-        <h3 class="responsive-title">Critères d'évaluation</h3>
-    <form id="evaluationForm">
+<h3 class="responsive-title">Critères d'évaluation</h3>
+<form id="evaluationForm">
 
+  <select id="themeSelector" onchange="updateTheme()">
+    <option value="default">Général</option>
+    <option value="uroGyn">Uro-Gynécologie</option>
+  </select>
 
-  <!-- Assiduité aux séances -->
+  <div id="default" style="display: block;">
+    <!-- Assiduité aux séances -->
     <div class="range-container">
-  <label for="assiduite">Assiduité aux séances </label>
-  <input type="range" id="assiduite" name="assiduite" min="0" max="10" step="1" value="5">
-  <span id="assiduiteValue" class="note">5</span><br>
-  <textarea id="assiduiteNotes" name="assiduiteNotes" placeholder="Notes sur l'assiduité..." rows="2" cols="40"></textarea><br><br>
-</div><br>
+      <label for="assiduite">Assiduité aux séances </label>
+      <input type="range" id="assiduite" name="assiduite" min="0" max="10" step="1" value="5">
+      <span id="assiduiteValue" class="note">5</span><br>
+      <textarea id="assiduiteNotes" name="assiduiteNotes" placeholder="Notes sur l'assiduité..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
 
-  <!-- Observance du traitement -->
+    <!-- Observance du traitement -->
     <div class="range-container">
+      <label for="observance">Observance du traitement </label>
+      <input type="range" id="observance" name="observance" min="0" max="10" step="1" value="5">
+      <span id="observanceValue" class="note">5</span><br>
+      <textarea id="observanceNotes" name="observanceNotes" placeholder="Notes sur l'observance..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
 
-  <label for="observance">Observance du traitement </label>
-  <input type="range" id="observance" name="observance" min="0" max="10" step="1" value="5">
-  <span id="observanceValue" class="note">5</span><br>
-  <textarea id="observanceNotes" name="observanceNotes" placeholder="Notes sur l'observance..." rows="2" cols="40"></textarea><br><br>
-</div><br>
-
-  <!-- Douleur -->
+    <!-- Douleur -->
     <div class="range-container">
+      <label for="douleur">Douleur </label>
+      <input type="range" id="douleur" name="douleur" min="0" max="10" step="1" value="5">
+      <span id="douleurValue" class="note">5</span><br>
+      <textarea id="douleurNotes" name="douleurNotes" placeholder="Notes sur la douleur..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
 
-  <label for="douleur">Douleur </label>
-  <input type="range" id="douleur" name="douleur" min="0" max="10" step="1" value="5">
-  <span id="douleurValue" class="note">5</span><br>
-  <textarea id="douleurNotes" name="douleurNotes" placeholder="Notes sur la douleur..." rows="2" cols="40"></textarea><br><br>
-</div><br>
-
-  <!-- Cutané-trophique -->
+    <!-- Cutané-trophique -->
     <div class="range-container">
+      <label for="cutane">Cutané-trophique </label>
+      <input type="range" id="cutane" name="cutane" min="0" max="10" step="1" value="5">
+      <span id="cutaneValue" class="note">5</span><br>
+      <textarea id="cutaneNotes" name="cutaneNotes" placeholder="Notes sur l'aspect cutané-trophique..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
 
-  <label for="cutane">Cutané-trophique </label>
-  <input type="range" id="cutane" name="cutane" min="0" max="10" step="1" value="5">
-  <span id="cutaneValue" class="note">5</span><br>
-  <textarea id="cutaneNotes" name="cutaneNotes" placeholder="Notes sur l'aspect cutané-trophique..." rows="2" cols="40"></textarea><br><br>
-</div><br>
-
-  <!-- Mobilité -->
+    <!-- Mobilité -->
     <div class="range-container">
+      <label for="mobilite">Mobilité </label>
+      <input type="range" id="mobilite" name="mobilite" min="0" max="10" step="1" value="5">
+      <span id="mobiliteValue" class="note">5</span><br>
+      <textarea id="mobiliteNotes" name="mobiliteNotes" placeholder="Notes sur la mobilité..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
 
-  <label for="mobilite">Mobilité </label>
-  <input type="range" id="mobilite" name="mobilite" min="0" max="10" step="1" value="5">
-  <span id="mobiliteValue" class="note">5</span><br>
-  <textarea id="mobiliteNotes" name="mobiliteNotes" placeholder="Notes sur la mobilité..." rows="2" cols="40"></textarea><br><br>
-</div><br>
-
-  <!-- Force -->
+    <!-- Force -->
     <div class="range-container">
+      <label for="force">Force </label>
+      <input type="range" id="force" name="force" min="0" max="10" step="1" value="5">
+      <span id="forceValue" class="note">5</span><br>
+      <textarea id="forceNotes" name="forceNotes" placeholder="Notes sur la force..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
 
-  <label for="force">Force </label>
-  <input type="range" id="force" name="force" min="0" max="10" step="1" value="5">
-  <span id="forceValue" class="note">5</span><br>
-  <textarea id="forceNotes" name="forceNotes" placeholder="Notes sur la force..." rows="2" cols="40"></textarea><br><br>
-</div><br>
-
-  <!-- Aspect Fonctionnel -->
+    <!-- Aspect Fonctionnel -->
     <div class="range-container">
+      <label for="fonctionnel">Aspect Fonctionnel </label>
+      <input type="range" id="fonctionnel" name="fonctionnel" min="0" max="10" step="1" value="5">
+      <span id="fonctionnelValue" class="note">5</span><br>
+      <textarea id="fonctionnelNotes" name="fonctionnelNotes" placeholder="Notes sur l'aspect fonctionnel..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
 
-  <label for="fonctionnel">Aspect Fonctionnel </label>
-  <input type="range" id="fonctionnel" name="fonctionnel" min="0" max="10" step="1" value="5">
-  <span id="fonctionnelValue" class="note">5</span><br>
-  <textarea id="fonctionnelNotes" name="fonctionnelNotes" placeholder="Notes sur l'aspect fonctionnel..." rows="2" cols="40"></textarea><br><br>
-</div><br>
+    <canvas id="radarGeneraux" width="100" height="100"></canvas>
+  </div>
 
+  <div id="uroGyn" style="display: none;">
+    <!-- Assiduité aux séances -->
+    <div class="range-container">
+      <label for="assiduite_gyn">Assiduité aux séances</label>
+      <input type="range" id="assiduite_gyn" name="assiduite_gyn" min="0" max="5" step="1" value="3">
+      <span id="assiduiteGynValue" class="note">3</span><br>
+      <textarea id="assiduiteGynNotes" name="assiduiteGynNotes" placeholder="Notes sur l'assiduité..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
+
+    <!-- Observance du traitement -->
+    <div class="range-container">
+      <label for="observance_gyn">Observance du traitement (à domicile)</label>
+      <input type="range" id="observance_gyn" name="observance_gyn" min="0" max="5" step="1" value="3">
+      <span id="observanceGynValue" class="note">3</span><br>
+      <textarea id="observanceGynNotes" name="observanceGynNotes" placeholder="Notes sur l'observance..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
+
+    <!-- Force des fibres phasiques -->
+    <div class="range-container">
+      <label for="force_phasiques">Force des fibres phasiques</label>
+      <input type="range" id="force_phasiques" name="force_phasiques" min="0" max="5" step="1" value="3">
+      <span id="forcePhasiquesValue" class="note">3</span><br>
+      <textarea id="forcePhasiquesNotes" name="forcePhasiquesNotes" placeholder="Notes sur la force des fibres phasiques..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
+
+    <!-- Force des fibres toniques -->
+    <div class="range-container">
+      <label for="force_toniques">Force des fibres toniques</label>
+      <input type="range" id="force_toniques" name="force_toniques" min="0" max="5" step="1" value="3">
+      <span id="forceToniquesValue" class="note">3</span><br>
+      <textarea id="forceToniquesNotes" name="forceToniquesNotes" placeholder="Notes sur la force des fibres toniques..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
+
+    <!-- Réflexe de toux -->
+    <div class="range-container">
+      <label for="reflexe_toux">Réflexe de toux</label>
+      <input type="range" id="reflexe_toux" name="reflexe_toux" min="0" max="5" step="1" value="3">
+      <span id="reflexeTouxValue" class="note">3</span><br>
+      <textarea id="reflexeTouxNotes" name="reflexeTouxNotes" placeholder="Notes sur le réflexe de toux..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
+
+    <!-- Douleur -->
+    <div class="range-container">
+      <label for="douleur_gyn">Douleur</label>
+      <input type="range" id="douleur_gyn" name="douleur_gyn" min="0" max="5" step="1" value="3">
+      <span id="douleurGynValue" class="note">3</span><br>
+      <textarea id="douleurGynNotes" name="douleurGynNotes" placeholder="Notes sur la douleur..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
+
+    <!-- Aspect Fonctionnel -->
+    <div class="range-container">
+      <label for="fonctionnel_gyn">Aspect Fonctionnel</label>
+      <input type="range" id="fonctionnel_gyn" name="fonctionnel_gyn" min="0" max="5" step="1" value="3">
+      <span id="fonctionnelGynValue" class="note">3</span><br>
+      <textarea id="fonctionnelGynNotes" name="fonctionnelGynNotes" placeholder="Notes sur l'aspect fonctionnel..." rows="2" cols="40"></textarea><br><br>
+    </div><br>
+
+    <canvas id="radarGyn" width="100" height="100"></canvas>
+  </div>
 </form>
 
-   <canvas id="myRadarChart" width="100" height="100"></canvas>
 
   <!-- Première Question -->
   <div class="question">
@@ -396,119 +465,187 @@ input[type="radio"]:checked {
             <option value="Yves Marinoni">Yves Marinoni</option>
         </select>
 
+
 <script>
-   document.addEventListener("DOMContentLoaded", function() {
-            // Initialisation du graphique radar avec Chart.js
-            var ctx = document.getElementById('myRadarChart').getContext('2d');
-            var myRadarChart = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['Assiduité', 'Observance', 'Douleur', 'Cutané-trophique', 'Mobilité', 'Force', 'Aspect Fonctionnel'],
-                    datasets: [{
-                        label: 'Évaluation',
-                        data: [
-                            document.getElementById("assiduite").value,
-                            document.getElementById("observance").value,
-                            document.getElementById("douleur").value,
-                            document.getElementById("cutane").value,
-                            document.getElementById("mobilite").value,
-                            document.getElementById("force").value,
-                            document.getElementById("fonctionnel").value
-                        ],
-                        backgroundColor: 'rgba(255, 87, 51, 0.2)', // couleur de fond
-                        borderColor: '#FF5733', // couleur des bordures
-                        borderWidth: 2
-                    }]
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Fonction pour changer la thématique affichée
+    function updateTheme() {
+        var theme = document.getElementById("themeSelector").value;
+        var defaultElements = document.getElementById("default");
+        var uroGynElements = document.getElementById("uroGyn");
+
+        if (theme === "uroGyn") {
+            defaultElements.style.display = "none";
+            uroGynElements.style.display = "block";
+        } else {
+            defaultElements.style.display = "block";
+            uroGynElements.style.display = "none";
+        }
+    }
+
+    // Initialiser les graphiques radar
+    function initRadar(id, labels, initialData) {
+        var ctx = document.getElementById(id).getContext("2d");
+        return new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Evaluation',
+                    data: initialData,  // Valeurs initiales
+                    borderColor: '#FF0000',
+                    backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        suggestedMin: 0,
+                        suggestedMax: 10
+                    }
                 },
-             options: {
-                    scales: {
-                        r: {
-                            min: 0, // Valeur minimale de l'échelle
-                            max: 10, // Valeur maximale de l'échelle
-                            ticks: {
-                                stepSize: 1, // Espacement entre les valeurs sur l'axe
-                                showLabelBackdrop: false, // Pas de fond pour les labels
-                                font: {
-                                    size: 14 // Taille de la police pour les labels
-                                }
-                            },
-                            grid: {
-                                color: '#ddd', // Couleur de la grille
-                                lineWidth: 1 // Largeur des lignes de la grille
-                            }
-                        }
-                    },
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top', // Position de la légende
-                            labels: {
-                                font: {
-                                    size: 14 // Taille de la police pour la légende
-                                }
-                            }
-                        }
+                responsive: true
+            }
+        });
+    }
+
+    // Mettre à jour le graphique radar en fonction des curseurs
+    function updateRadar(chart, data) {
+        chart.data.datasets[0].data = data;
+        chart.update();
+    }
+
+    // Mettre à jour la valeur des curseurs et des graphiques
+    function updateSliderValue(sliderId, displayId, chart, sliderValues) {
+        var slider = document.getElementById(sliderId);
+        var value = slider.value;
+        document.getElementById(displayId).textContent = value;
+
+        // Mettre à jour les valeurs des curseurs dans le tableau et le graphique
+        sliderValues.push(value);
+        updateRadar(chart, sliderValues);
+    }
+
+    // Récupérer les valeurs des curseurs
+    function getSliderValuesGeneral() {
+        return [
+            document.getElementById("assiduite").value,
+            document.getElementById("observance").value,
+            document.getElementById("douleur").value,
+            document.getElementById("cutane").value,
+            document.getElementById("mobilite").value,
+            document.getElementById("force").value,
+            document.getElementById("fonctionnel").value
+        ];
+    }
+
+    // Récupérer les valeurs des curseurs pour la thématique Uro-Gynécologie
+    function getUroGynSliderValues() {
+        return [
+            document.getElementById("assiduite_gyn").value,
+            document.getElementById("observance_gyn").value,
+            document.getElementById("force_phasiques").value,
+            document.getElementById("force_toniques").value,
+            document.getElementById("reflexe_toux").value,
+            document.getElementById("douleur_gyn").value,
+            document.getElementById("fonctionnel_gyn").value
+        ];
+    }
+
+// Initialiser les graphiques radar pour chaque thématique
+function initRadar(id, labels, initialData, maxScale) {
+    var ctx = document.getElementById(id).getContext("2d");
+    return new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Evaluation',
+                data: initialData,  // Valeurs initiales
+                borderColor: '#FF0000',
+                backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                r: {
+                    suggestedMin: 0,
+                    suggestedMax: maxScale,  // Utilisation de maxScale pour définir l'échelle
+                    ticks: {
+                        stepSize: 1
                     }
                 }
-            });
+            },
+            responsive: true
+        }
+    });
+}
 
-            // Fonction de mise à jour du graphique
-            function updateChart() {
-                myRadarChart.data.datasets[0].data = [
-                    document.getElementById("assiduite").value,
-                    document.getElementById("observance").value,
-                    document.getElementById("douleur").value,
-                    document.getElementById("cutane").value,
-                    document.getElementById("mobilite").value,
-                    document.getElementById("force").value,
-                    document.getElementById("fonctionnel").value
-                ];
-                myRadarChart.update(); // Met à jour le graphique
-            }
+// Appel pour le graphique général avec une échelle de 10
+var radarGeneraux = initRadar("radarGeneraux", ['Assiduité', 'Observance', 'Douleur', 'Cutané-Trophique', 'Mobilité', 'Force', 'Fonctionnel'], [5, 5, 5, 5, 5, 5, 5], 10);
 
-            // Attacher les écouteurs d'événements pour chaque curseur
-            document.getElementById("assiduite").addEventListener("input", function() {
-                document.getElementById("assiduiteValue").textContent = this.value;
-                updateChart();
-            });
+// Appel pour le graphique Uro-Gynécologie avec une échelle de 5
+var radarGyn = initRadar("radarGyn", ['Assiduité', 'Observance', 'Force Fibres Phasiques', 'Force Fibres Toniques', 'Réflexe Toux', 'Douleur', 'Fonctionnel'], [5, 5, 5, 5, 5, 5, 5], 5);
 
-            document.getElementById("observance").addEventListener("input", function() {
-                document.getElementById("observanceValue").textContent = this.value;
-                updateChart();
-            });
 
-            document.getElementById("douleur").addEventListener("input", function() {
-                document.getElementById("douleurValue").textContent = this.value;
-                updateChart();
-            });
+    // Ajouter des événements pour les curseurs
+    document.getElementById("assiduite").addEventListener("input", function() {
+        updateSliderValue("assiduite", "assiduiteValue", radarGeneraux, getSliderValuesGeneral());
+    });
+    document.getElementById("observance").addEventListener("input", function() {
+        updateSliderValue("observance", "observanceValue", radarGeneraux, getSliderValuesGeneral());
+    });
+    document.getElementById("douleur").addEventListener("input", function() {
+        updateSliderValue("douleur", "douleurValue", radarGeneraux, getSliderValuesGeneral());
+    });
+    document.getElementById("cutane").addEventListener("input", function() {
+        updateSliderValue("cutane", "cutaneValue", radarGeneraux, getSliderValuesGeneral());
+    });
+    document.getElementById("mobilite").addEventListener("input", function() {
+        updateSliderValue("mobilite", "mobiliteValue", radarGeneraux, getSliderValuesGeneral());
+    });
+    document.getElementById("force").addEventListener("input", function() {
+        updateSliderValue("force", "forceValue", radarGeneraux, getSliderValuesGeneral());
+    });
+    document.getElementById("fonctionnel").addEventListener("input", function() {
+        updateSliderValue("fonctionnel", "fonctionnelValue", radarGeneraux, getSliderValuesGeneral());
+    });
 
-            document.getElementById("cutane").addEventListener("input", function() {
-                document.getElementById("cutaneValue").textContent = this.value;
-                updateChart();
-            });
+    // Ajouter des événements pour les curseurs de la thématique Uro-Gynécologie
+    document.getElementById("assiduite_gyn").addEventListener("input", function() {
+        updateSliderValue("assiduite_gyn", "assiduiteGynValue", radarGyn, getUroGynSliderValues());
+    });
+    document.getElementById("observance_gyn").addEventListener("input", function() {
+        updateSliderValue("observance_gyn", "observanceGynValue", radarGyn, getUroGynSliderValues());
+    });
+    document.getElementById("force_phasiques").addEventListener("input", function() {
+        updateSliderValue("force_phasiques", "forcePhasiquesValue", radarGyn, getUroGynSliderValues());
+    });
+    document.getElementById("force_toniques").addEventListener("input", function() {
+        updateSliderValue("force_toniques", "forceToniquesValue", radarGyn, getUroGynSliderValues());
+    });
+    document.getElementById("reflexe_toux").addEventListener("input", function() {
+        updateSliderValue("reflexe_toux", "reflexeTouxValue", radarGyn, getUroGynSliderValues());
+    });
+    document.getElementById("douleur_gyn").addEventListener("input", function() {
+        updateSliderValue("douleur_gyn", "douleurGynValue", radarGyn, getUroGynSliderValues());
+    });
+    document.getElementById("fonctionnel_gyn").addEventListener("input", function() {
+        updateSliderValue("fonctionnel_gyn", "fonctionnelGynValue", radarGyn, getUroGynSliderValues());
+    });
 
-            document.getElementById("mobilite").addEventListener("input", function() {
-                document.getElementById("mobiliteValue").textContent = this.value;
-                updateChart();
-            });
+    // Initialiser le thème au chargement de la page
+    updateTheme();
 
-            document.getElementById("force").addEventListener("input", function() {
-                document.getElementById("forceValue").textContent = this.value;
-                updateChart();
-            });
+    // Afficher le bon graphique radar en fonction du thème
+    document.getElementById("themeSelector").addEventListener("change", updateTheme);
+});
 
-            document.getElementById("fonctionnel").addEventListener("input", function() {
-                document.getElementById("fonctionnelValue").textContent = this.value;
-                updateChart();
-            });
-        });
-    </script>
 
+ </script>
   
 </body>
 </html>
-
-
-
-
-
