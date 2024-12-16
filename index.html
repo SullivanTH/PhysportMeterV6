@@ -96,13 +96,40 @@
             color: #333;
         }
         
-        input[type="text"], input[type="date"], textarea {
+        input[type="text"], textarea {
             width: 80%;
             padding: 20px;
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 15px;
         }
+        
+  
+        input[type="date"], textarea {
+            width: 80%;
+            padding: 20px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+        }
+
+        #birth-date {
+     width: 30%;
+            padding: 20px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+        }
+
+
+        #explication {
+       font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
         input[type="range"] {
             width: 100%;
             margin: 20px 0;
@@ -211,22 +238,13 @@ input[type="radio"] {
   margin-right: 5px;
 }
 
-#radarGyn {
+#myRadarChart {
     width: 500px !important;   /* Largeur spécifique */
     height: 500px !important;  /* Hauteur spécifique */
       position: relative;
             margin: 30px auto; /* Centrer le graphique */
 
 }
-
-#radarGeneraux {
-    width: 500px !important;   /* Largeur spécifique */
-    height: 500px !important;  /* Hauteur spécifique */
-      position: relative;
-            margin: 30px auto; /* Centrer le graphique */
-
-}
-
 
 input[type="radio"]:checked {
   background-color: #007bff;
@@ -246,15 +264,15 @@ input[type="radio"]:checked {
     </style>
 </head>
 
-
 <body>
   <header class="header">
     <img src="https://www.physport.ch/wp-content/uploads/2022/09/logo-gris.svg" 
          alt="Logo de Physport" 
          class="header-logo">
     <div class="header-info">
-        <p>Rue de Villereuse 3, Bd de la Tour 6, Genève</p>
-        <p>Tel : 0228402980</p>
+        <p>Rue de Villereuse 3, 1207 Genève</p>
+        <p> Blvd de la Tour 6, 1205 Genève</p>
+        <p>Tel : 022.840.29.80</p>
         <p>Email : <a href="mailto:info@physport.ch">info@physport.ch</a></p>
     </div>
 </header>
@@ -267,15 +285,21 @@ input[type="radio"]:checked {
         </div>
 
 <div class="inline-container">
-      <label for="evaluation-date">Date de l'évaluation</label>
+      <label for="evaluation-date">Rapport succint de physiothérapie du </label>
         <input type="date" id="evaluation-date" name="evaluation-date">
     </div>
 
  <div class="line">
-        <!-- Nom du patient -->
-        <label for="patient-name">Nom du patient </label>
+        <!-- Nom -->
+        <label for="patient-name">Nom </label>
         <input type="text" id="patient-name" name="patient-name" placeholder="Entrez le nom du patient">
+  
+       <!-- Prénom -->
+        <label for="first-name">Prénom </label>
+        <input type="text" id="first-name" name="first-name"placeholder="Entrez le prénom du patient">
+    </div>
 
+  <div>
         <!-- Date de naissance -->
         <label for="birth-date">Date de naissance </label>
         <input type="date" id="birth-date" name="birth-date">
@@ -294,6 +318,12 @@ input[type="radio"]:checked {
 <!-- Critères d'évaluation -->
 <h3 class="responsive-title">Critères d'évaluation</h3>
 <form id="evaluationForm">
+
+  <label for="explication" id="explication"> 
+Échelle de 0 à 10 : Cette échelle permet d'évaluer chaque critère.
+0 correspond au niveau le plus faible, indiquant aucun progrès ou une situation peu satisfaisante.
+10 représente le niveau optimal, indiquant une situation idéale, sans symptômes ou avec un objectif atteint à 100 %. </label>
+
 
   <select id="themeSelector" onchange="updateTheme()">
     <option value="default">Général</option>
@@ -319,7 +349,7 @@ input[type="radio"]:checked {
 
     <!-- Douleur -->
     <div class="range-container">
-      <label for="douleur">Douleur </label>
+      <label for="douleur">Evolution de la douleur </label>
       <input type="range" id="douleur" name="douleur" min="0" max="10" step="1" value="5">
       <span id="douleurValue" class="note">5</span><br>
       <textarea id="douleurNotes" name="douleurNotes" placeholder="Notes sur la douleur..." rows="2" cols="40"></textarea><br><br>
@@ -403,7 +433,7 @@ input[type="radio"]:checked {
 
     <!-- Douleur -->
     <div class="range-container">
-      <label for="douleur_gyn">Douleur</label>
+      <label for="douleur_gyn">Evolution de la douleur</label>
       <input type="range" id="douleur_gyn" name="douleur_gyn" min="0" max="5" step="1" value="3">
       <span id="douleurGynValue" class="note">3</span><br>
       <textarea id="douleurGynNotes" name="douleurGynNotes" placeholder="Notes sur la douleur..." rows="2" cols="40"></textarea><br><br>
@@ -424,7 +454,7 @@ input[type="radio"]:checked {
 
   <!-- Première Question -->
   <div class="question">
-    <label for="patient-opinion">Avis du patient sur la poursuite du traitement</label>
+    <label for="patient-opinion">Le patient désire poursuivre le traitement</label>
     <select id="patient-opinion" onchange="showResponse('patient-opinion')">
       <option value="">Oui ou Non</option>
       <option value="oui">Oui</option>
@@ -435,7 +465,7 @@ input[type="radio"]:checked {
 
   <!-- Deuxième Question -->
   <div class="question">
-    <label for="exercise-opinion">Avis du physiothérapeute sur la poursuite du traitement</label>
+    <label for="exercise-opinion">Le physiothérapeute désire poursuivre le traitement</label>
     <select id="exercise-opinion" onchange="showResponse('exercise-opinion')">
       <option value="">Oui ou Non</option>
       <option value="oui">Oui</option>
