@@ -102,6 +102,7 @@
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 15px;
+             margin-left: 10px
         }
         
   
@@ -111,6 +112,7 @@
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 15px;
+           
         }
 
         #birth-date {
@@ -134,6 +136,7 @@
         input[type="range"] {
             width: 100%;
             margin: 20px 0;
+
         }
         select {
             width: 100%;
@@ -154,30 +157,36 @@
             margin-top: 20px;
         }
 
-        .range-container {
-  display: flex;
-  align-items: center; /* Aligne verticalement les éléments */
-  margin-bottom: 10px; /* Ajoute de l'espace entre les éléments */
+    .range-container {
+    display: flex;
+    align-items: center; /* Alignement vertical centré */
+    justify-content: space-between; /* Espacement égal entre les éléments */
+    margin-bottom: 15px; /* Espace entre chaque bloc */
+    width: 100%; /* Utilisation complète de la largeur */
+    margin-right: 10px;
 }
 
 .range-container label {
-  margin-right: 10px; /* Ajoute de l'espace entre le label et le curseur */
+    width: 25%; /* Taille fixe pour les labels */
+    font-weight: bold;
+    margin-right: 10px;
 }
 
 .range-container input[type="range"] {
-  width: 60%; /* Ajuste la largeur du curseur */
-  margin-right: 10px; /* Espacement entre le curseur et le texte */
+    width: 50%; /* Curseur plus large */
+    margin-right: 10px;
 }
 
-.range-container .note {
-  margin-right: 10px; /* Espacement entre la note et le textarea */
-}
 
 .range-container .note-textarea {
-  font-size: 16px;
-  padding: 5px;
-  width: 150px; /* Ajuste la largeur du textarea */
-  height: 40px; /* Ajuste la hauteur du textarea */
+    width: 20%;               /* Taille de base */
+    min-width: 100px;         /* Largeur minimale */
+    height: 40px;             /* Hauteur de base */
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: both;             /* Autorise le redimensionnement horizontal et vertical */
+    overflow: auto;           /* Ajoute des barres de défilement si nécessaire */
 }
 
 /* Conteneur pour aligner date et note */
@@ -262,6 +271,7 @@ input[type="radio"]:checked {
     box-sizing: border-box; /* Inclure bordures et padding dans les dimensions */
 }
 
+
     </style>
 </head>
 
@@ -271,6 +281,7 @@ input[type="radio"]:checked {
          alt="Logo de Physport" 
          class="header-logo">
     <div class="header-info">
+       <p>Cabinet de physiothérapie et d'ostéopthie</p>
         <p>Rue de Villereuse 3, 1207 Genève</p>
         <p> Blvd de la Tour 6, 1205 Genève</p>
         <p>Tel : 022.840.29.80</p>
@@ -282,7 +293,7 @@ input[type="radio"]:checked {
 
     <div class="container">
         <div class="title-container">
-            <div class="title">PhysportMeter</div>
+            <div class="title">Physport Tracker</div>
         </div>
 
 <div class="inline-container">
@@ -316,6 +327,9 @@ input[type="radio"]:checked {
         <input type="date" id="prescription-date" name="prescription-date">
     </div>
 
+<body>
+
+  <body>
 <!-- Critères d'évaluation -->
 <h3 class="responsive-title">Critères d'évaluation</h3>
 <form id="evaluationForm">
@@ -327,7 +341,7 @@ input[type="radio"]:checked {
 
 
   <select id="themeSelector" onchange="updateTheme()">
-    <option value="default">Général</option>
+    <option value="default">Physiothérapie générale</option>
     <option value="uroGyn">Uro-Gynécologie</option>
   </select>
 
@@ -337,7 +351,7 @@ input[type="radio"]:checked {
       <label for="assiduite">Assiduité aux séances </label>
       <input type="range" id="assiduite" name="assiduite" min="0" max="10" step="1" value="5">
       <span id="assiduiteValue" class="note">5</span><br>
-      <textarea id="assiduiteNotes" name="assiduiteNotes" placeholder="Notes sur l'assiduité..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="assiduiteNotes" name="assiduiteNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Observance du traitement -->
@@ -345,7 +359,7 @@ input[type="radio"]:checked {
       <label for="observance">Observance du traitement </label>
       <input type="range" id="observance" name="observance" min="0" max="10" step="1" value="5">
       <span id="observanceValue" class="note">5</span><br>
-      <textarea id="observanceNotes" name="observanceNotes" placeholder="Notes sur l'observance..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="observanceNotes" name="observanceNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Douleur -->
@@ -353,7 +367,7 @@ input[type="radio"]:checked {
       <label for="douleur">Evolution de la douleur </label>
       <input type="range" id="douleur" name="douleur" min="0" max="10" step="1" value="5">
       <span id="douleurValue" class="note">5</span><br>
-      <textarea id="douleurNotes" name="douleurNotes" placeholder="Notes sur la douleur..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="douleurNotes" name="douleurNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Cutané-trophique -->
@@ -361,7 +375,7 @@ input[type="radio"]:checked {
       <label for="cutane">Cutané-trophique </label>
       <input type="range" id="cutane" name="cutane" min="0" max="10" step="1" value="5">
       <span id="cutaneValue" class="note">5</span><br>
-      <textarea id="cutaneNotes" name="cutaneNotes" placeholder="Notes sur l'aspect cutané-trophique..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="cutaneNotes" name="cutaneNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Mobilité -->
@@ -369,7 +383,7 @@ input[type="radio"]:checked {
       <label for="mobilite">Mobilité </label>
       <input type="range" id="mobilite" name="mobilite" min="0" max="10" step="1" value="5">
       <span id="mobiliteValue" class="note">5</span><br>
-      <textarea id="mobiliteNotes" name="mobiliteNotes" placeholder="Notes sur la mobilité..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="mobiliteNotes" name="mobiliteNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Force -->
@@ -377,7 +391,7 @@ input[type="radio"]:checked {
       <label for="force">Force </label>
       <input type="range" id="force" name="force" min="0" max="10" step="1" value="5">
       <span id="forceValue" class="note">5</span><br>
-      <textarea id="forceNotes" name="forceNotes" placeholder="Notes sur la force..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="forceNotes" name="forceNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Aspect Fonctionnel -->
@@ -385,7 +399,7 @@ input[type="radio"]:checked {
       <label for="fonctionnel">Aspect Fonctionnel </label>
       <input type="range" id="fonctionnel" name="fonctionnel" min="0" max="10" step="1" value="5">
       <span id="fonctionnelValue" class="note">5</span><br>
-      <textarea id="fonctionnelNotes" name="fonctionnelNotes" placeholder="Notes sur l'aspect fonctionnel..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="fonctionnelNotes" name="fonctionnelNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <canvas id="radarGeneraux" width="100" height="100"></canvas>
@@ -397,7 +411,7 @@ input[type="radio"]:checked {
       <label for="assiduite_gyn">Assiduité aux séances</label>
       <input type="range" id="assiduite_gyn" name="assiduite_gyn" min="0" max="5" step="1" value="3">
       <span id="assiduiteGynValue" class="note">3</span><br>
-      <textarea id="assiduiteGynNotes" name="assiduiteGynNotes" placeholder="Notes sur l'assiduité..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="assiduiteGynNotes" name="assiduiteGynNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Observance du traitement -->
@@ -405,7 +419,7 @@ input[type="radio"]:checked {
       <label for="observance_gyn">Observance du traitement (à domicile)</label>
       <input type="range" id="observance_gyn" name="observance_gyn" min="0" max="5" step="1" value="3">
       <span id="observanceGynValue" class="note">3</span><br>
-      <textarea id="observanceGynNotes" name="observanceGynNotes" placeholder="Notes sur l'observance..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="observanceGynNotes" name="observanceGynNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Force des fibres phasiques -->
@@ -413,7 +427,7 @@ input[type="radio"]:checked {
       <label for="force_phasiques">Force des fibres phasiques</label>
       <input type="range" id="force_phasiques" name="force_phasiques" min="0" max="5" step="1" value="3">
       <span id="forcePhasiquesValue" class="note">3</span><br>
-      <textarea id="forcePhasiquesNotes" name="forcePhasiquesNotes" placeholder="Notes sur la force des fibres phasiques..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="forcePhasiquesNotes" name="forcePhasiquesNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Force des fibres toniques -->
@@ -421,7 +435,7 @@ input[type="radio"]:checked {
       <label for="force_toniques">Force des fibres toniques</label>
       <input type="range" id="force_toniques" name="force_toniques" min="0" max="5" step="1" value="3">
       <span id="forceToniquesValue" class="note">3</span><br>
-      <textarea id="forceToniquesNotes" name="forceToniquesNotes" placeholder="Notes sur la force des fibres toniques..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="forceToniquesNotes" name="forceToniquesNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Réflexe de toux -->
@@ -429,7 +443,7 @@ input[type="radio"]:checked {
       <label for="reflexe_toux">Réflexe de toux</label>
       <input type="range" id="reflexe_toux" name="reflexe_toux" min="0" max="5" step="1" value="3">
       <span id="reflexeTouxValue" class="note">3</span><br>
-      <textarea id="reflexeTouxNotes" name="reflexeTouxNotes" placeholder="Notes sur le réflexe de toux..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="reflexeTouxNotes" name="reflexeTouxNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Douleur -->
@@ -437,7 +451,7 @@ input[type="radio"]:checked {
       <label for="douleur_gyn">Evolution de la douleur</label>
       <input type="range" id="douleur_gyn" name="douleur_gyn" min="0" max="5" step="1" value="3">
       <span id="douleurGynValue" class="note">3</span><br>
-      <textarea id="douleurGynNotes" name="douleurGynNotes" placeholder="Notes sur la douleur..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="douleurGynNotes" name="douleurGynNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
     <!-- Aspect Fonctionnel -->
@@ -445,16 +459,26 @@ input[type="radio"]:checked {
       <label for="fonctionnel_gyn">Aspect Fonctionnel</label>
       <input type="range" id="fonctionnel_gyn" name="fonctionnel_gyn" min="0" max="5" step="1" value="3">
       <span id="fonctionnelGynValue" class="note">3</span><br>
-      <textarea id="fonctionnelGynNotes" name="fonctionnelGynNotes" placeholder="Notes sur l'aspect fonctionnel..." rows="2" cols="40"></textarea><br><br>
+      <textarea id="fonctionnelGynNotes" name="fonctionnelGynNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
-
+<body>
+  <body>
     <canvas id="radarGyn" width="100" height="100"></canvas>
   </div>
 </form>
 
-
 <label for="physioNote">Notes :</label>
-        <textarea id="physioNote" rows="4" placeholder="Écrivez votre note ici..."></textarea>
+        <textarea id="physioNote" rows="4" ></textarea>
+
+<div class="question">
+    <label for="exercise-opinion">Avis du physiothérapeute sur la poursuite du traitement</label>
+    <select id="exercise-opinion" onchange="showResponse('exercise-opinion')">
+      <option value="">Oui ou Non</option>
+      <option value="oui">Oui</option>
+      <option value="non">Non</option>
+    </select>
+    <div class="response" id="response2"></div>
+  </div>
 
         <label for="evaluatorName">Nom du physiothérapeute :</label>
         <select id="evaluatorName">
@@ -473,6 +497,8 @@ input[type="radio"]:checked {
             <option value="Téo Junge">Téo Junge</option>
             <option value="Yves Marinoni">Yves Marinoni</option>
         </select>
+
+ 
 
 
 <script>
