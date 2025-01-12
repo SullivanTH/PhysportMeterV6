@@ -58,6 +58,7 @@
             background: #f4f4f4;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            
         }
         .logo-container {
             text-align: center;
@@ -94,6 +95,7 @@
             font-weight: bold;
             display: block;
             color: #333;
+            margin-bottom: 10px;
         }
         
         input[type="text"], textarea {
@@ -104,6 +106,7 @@
             border-radius: 15px;
              margin-left: 10px
         }
+        
         
   
         input[type="date"], textarea {
@@ -166,6 +169,10 @@
     margin-right: 10px;
 }
 
+.range-container textarea {
+  resize: vertical
+  }
+
 .range-container label {
     width: 25%; /* Taille fixe pour les labels */
     font-weight: bold;
@@ -177,16 +184,26 @@
     margin-right: 10px;
 }
 
+#physioNote {
+    width: 500px; /* Largeur fixe */
+    height: 50px; /* Hauteur de base */
+    display: block;
+    margin: 0 auto;
+    resize: vertical; /* Autorise UNIQUEMENT le redimensionnement vertical */
+    border: 1px solid #ccc; /* Bordure visible */
+    padding: 10px; /* Espacement interne */
+    font-size: 16px; /* Taille de la police */
+    box-sizing: border-box; /* Inclure bordures et padding dans les dimensions */
 
-.range-container .note-textarea {
-    width: 20%;               /* Taille de base */
-    min-width: 100px;         /* Largeur minimale */
-    height: 40px;             /* Hauteur de base */
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    resize: both;             /* Autorise le redimensionnement horizontal et vertical */
-    overflow: auto;           /* Ajoute des barres de défilement si nécessaire */
+    
+}
+
+#themeSelector {
+margin-bottom: 10px;
+}
+
+.physioNote label {
+margin-bottom: 10px;
 }
 
 /* Conteneur pour aligner date et note */
@@ -217,6 +234,8 @@
 
 .question {
   margin-bottom: 15px; /* Espacement entre les questions */
+  align-items: center; /* Centre verticalement */
+
 }
 
 .question label {
@@ -261,16 +280,6 @@ input[type="radio"]:checked {
 }
       
 
-#physioNote {
-    width: 600px; /* Largeur de la zone */
-    height: 50px; /* Hauteur de la zone */
-    resize: both; /* Permet à l'utilisateur de redimensionner la zone */
-    border: 1px solid #ccc; /* Bordure visible */
-    padding: 10px; /* Espacement interne pour le confort d'écriture */
-    font-size: 16px; /* Taille de la police */
-    box-sizing: border-box; /* Inclure bordures et padding dans les dimensions */
-}
-
 
     </style>
 </head>
@@ -293,7 +302,7 @@ input[type="radio"]:checked {
 
     <div class="container">
         <div class="title-container">
-            <div class="title">Physport Tracker</div>
+            <div class="title">PhysportMeter</div>
         </div>
 
 <div class="inline-container">
@@ -467,7 +476,7 @@ input[type="radio"]:checked {
   </div>
 </form>
 
-<label for="physioNote">Notes :</label>
+<label for="physioNote">Notes générales:</label>
         <textarea id="physioNote" rows="4" ></textarea>
 
 <div class="question">
