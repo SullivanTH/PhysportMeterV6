@@ -9,6 +9,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     
     <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&family=Playfair+Display&display=swap');
+
         .header {
             text-align: center; /* Centrer horizontalement le contenu */
             background-color: #ffffff; /* Optionnel : couleur de fond */
@@ -87,11 +90,17 @@
         }
 
         .title {
-            font-family: 'Arial', sans-serif;
-            color: #c8102e;
-            font-size: 30px; /* Augmentation de la taille du texte PhysportMeter */
-            margin: 15px 0;
-        }
+      font-family: 'Raleway', sans-serif;  /* Police moderne et épurée */
+      font-size: 60px;                    /* Taille imposante */
+      font-weight: 900;                   /* Texte gras */
+      text-transform: uppercase;         /* Majuscules pour impact */
+      letter-spacing: 5px;               /* Espacement des lettres */
+      background: linear-gradient(90deg, #ff416c, #ff4b2b); /* Dégradé */
+      -webkit-background-clip: text;     /* Applique le dégradé au texte */
+      color: transparent;                /* Rend le texte transparent pour voir le dégradé */
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Ombre légère */
+    }
+        
         label {
             margin-top: 20px;
             font-weight: bold;
