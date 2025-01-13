@@ -1,4 +1,4 @@
 function doGet() {
-  return HtmlService.createHtmlOutputFromFile('Page')
+  return HtmlService.createHtmlOutputFromFile('index')
       .setTitle('PhysportMeter');
 }
