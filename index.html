@@ -12,7 +12,6 @@
         .header {
             text-align: center; /* Centrer horizontalement le contenu */
             background-color: #ffffff; /* Optionnel : couleur de fond */
-            padding: 5px 5px;
         }
 
         .header-content {
@@ -50,7 +49,10 @@
             margin: 0;
             padding: 0;
             background-color: #ffffff;
-        }
+            zoom:0.75;
+    
+}
+
         .container {
             margin: 30px auto;
             max-width: 600px;
@@ -128,26 +130,29 @@
 
 
         #explication {
-       font-family: Arial, sans-serif;
-            text-align: justify;
-            margin: 0;
-            padding: 0;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
+        font-size: 12px;         /* Taille de police réduite */
+  font-weight: 300;        /* Texte plus fin (100 à 300 pour finesse) */
+  color: #888888;          /* Couleur grise douce */
+  font-family: Arial, sans-serif; /* Police lisible et discrète */
+  opacity: 0.8;            /* Légère transparence */
+  letter-spacing: 0.5px;   /* Espacement subtil entre les lettres */
+  text-align: justify;
+}
 
         input[type="range"] {
             width: 100%;
             margin: 20px 0;
 
         }
-        select {
-            width: 100%;
-            padding: 15px;
-            margin-top: 7px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+
+       select {
+      width: 500px;                 /* Largeur fixe */
+      height: 30px;                 /* Hauteur personnalisée */
+      padding: 10px;                /* Espacement interne */   
+         display: block;        /* Nécessaire pour margin auto */
+      margin: auto;          /* ✅ Centre horizontalement */
+    }
+
         button {
             background-color: #c8102e;
             color: white;
@@ -170,7 +175,7 @@
 }
 
 .range-container textarea {
-  resize: vertical
+  resize: vertical ;
   }
 
 .range-container label {
@@ -186,23 +191,17 @@
 
 #physioNote {
     width: 500px; /* Largeur fixe */
-    height: 50px; /* Hauteur de base */
+    height: 30px; /* Hauteur de base */
     display: block;
     margin: 0 auto;
     resize: vertical; /* Autorise UNIQUEMENT le redimensionnement vertical */
     border: 1px solid #ccc; /* Bordure visible */
     padding: 10px; /* Espacement interne */
     font-size: 16px; /* Taille de la police */
-    box-sizing: border-box; /* Inclure bordures et padding dans les dimensions */
-
-    
+ 
 }
 
 #themeSelector {
-margin-bottom: 10px;
-}
-
-.physioNote label {
 margin-bottom: 10px;
 }
 
@@ -228,58 +227,31 @@ margin-bottom: 10px;
     flex: 1; /* Permet au champ de prendre plus d'espace si nécessaire */
 }
 
-        .questions {
-  margin-top: 20px; /* Espacement entre le radar et les questions */
-}
-
-.question {
-  margin-bottom: 15px; /* Espacement entre les questions */
-  align-items: center; /* Centre verticalement */
-
-}
-
-.question label {
-  font-size: 16px;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.options label {
-  margin-right: 20px;
-}
-
-    .question {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-
+    
     .response {
       font-weight: bold;
       margin-top: 10px;
     }
 
-    select {
-      padding: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+
 input[type="radio"] {
   margin-right: 5px;
 }
 
-#myRadarChart {
-    width: 500px !important;   /* Largeur spécifique */
-    height: 500px !important;  /* Hauteur spécifique */
-      position: relative;
-            margin: 30px auto; /* Centrer le graphique */
-
+.graph-container {
+    width: 500px;              /* Largeur spécifique de la zone du graphique */
+    height: 500px;             /* Hauteur spécifique de la zone du graphique */
+    margin: 0 auto;            /* Centrer la zone de graphique horizontalement */
+    padding: 10px;             /* Espacement intérieur */
+    border: 2px solid #ccc;    /* Bordure de l'encadré (couleur grise) */
+    box-sizing: border-box;    /* Inclut la bordure et le padding dans les dimensions */
+    background-color: #f4f4f4; /* Couleur de fond optionnelle */
 }
 
 input[type="radio"]:checked {
   background-color: #007bff;
-}
-      
 
+}
 
     </style>
 </head>
@@ -299,6 +271,7 @@ input[type="radio"]:checked {
 </header>
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+
 
     <div class="container">
         <div class="title-container">
@@ -411,7 +384,10 @@ input[type="radio"]:checked {
       <textarea id="fonctionnelNotes" name="fonctionnelNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
 
+<div class="graph-container">
     <canvas id="radarGeneraux" width="100" height="100"></canvas>
+  </div><br>
+
   </div>
 
   <div id="uroGyn" style="display: none;">
@@ -470,26 +446,27 @@ input[type="radio"]:checked {
       <span id="fonctionnelGynValue" class="note">3</span><br>
       <textarea id="fonctionnelGynNotes" name="fonctionnelGynNotes"  rows="2" cols="40"></textarea><br><br>
     </div><br>
-<body>
-  <body>
+ 
+ <div class="graph-container">
     <canvas id="radarGyn" width="100" height="100"></canvas>
+  </div><br>
+
   </div>
 </form>
 
-<label for="physioNote">Notes générales:</label>
+<label for="physioNote">Notes générales</label>
         <textarea id="physioNote" rows="4" ></textarea>
 
-<div class="question">
+
     <label for="exercise-opinion">Avis du physiothérapeute sur la poursuite du traitement</label>
     <select id="exercise-opinion" onchange="showResponse('exercise-opinion')">
       <option value="">Oui ou Non</option>
       <option value="oui">Oui</option>
       <option value="non">Non</option>
     </select>
-    <div class="response" id="response2"></div>
-  </div>
+   
 
-        <label for="evaluatorName">Nom du physiothérapeute :</label>
+    <label for="evaluatorName">Nom du physiothérapeute </label>
         <select id="evaluatorName">
             <option value="Audrey Mongellaz">Audrey Mongellaz</option>
             <option value="Audrey Pitz">Audrey Pitz</option>
@@ -506,9 +483,7 @@ input[type="radio"]:checked {
             <option value="Téo Junge">Téo Junge</option>
             <option value="Yves Marinoni">Yves Marinoni</option>
         </select>
-
  
-
 
 <script>
 
