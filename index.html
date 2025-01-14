@@ -11,6 +11,14 @@
     <style>
 
         @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&family=Playfair+Display&display=swap');
+        
+        @media print {
+       * {
+    -webkit-print-color-adjust: exact !important; /* ✅ Chrome/Safari */
+    print-color-adjust: exact !important;         /* ✅ Firefox/Edge */
+    color-adjust: exact !important;              /* ✅ Compatibilité générale */
+  }
+ }
 
         .header {
             text-align: center; /* Centrer horizontalement le contenu */
@@ -156,7 +164,7 @@
 
        select {
       width: 500px;                 /* Largeur fixe */
-      height: 30px;                 /* Hauteur personnalisée */
+      height: 40px;                 /* Hauteur personnalisée */
       padding: 10px;                /* Espacement interne */   
          display: block;        /* Nécessaire pour margin auto */
       margin: auto;          /* ✅ Centre horizontalement */
