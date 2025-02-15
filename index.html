@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -64,7 +64,7 @@
     
 }
 
-        .container {
+      .container {
             margin: 30px auto;
             max-width: 600px;
             padding: 20px;
@@ -208,7 +208,7 @@
 
 #physioNote {
     width: 500px; /* Largeur fixe */
-    height: 60px; /* Hauteur de base */
+    height: 30px; /* Hauteur de base */
     display: block;
     margin: 0 auto;
     resize: vertical; /* Autorise UNIQUEMENT le redimensionnement vertical */
@@ -391,11 +391,11 @@ input[type="radio"]:checked {
  <div class="line">
         <!-- Nom -->
         <label for="patient-name">Nom </label>
-        <input type="text" id="patient-name" name="patient-name" 
+        <input type="text" id="patient-name" name="patient-name" placeholder="Entrez le nom du patient">
   
        <!-- Prénom -->
         <label for="first-name">Prénom </label>
-        <input type="text" id="first-name" name="first-name"
+        <input type="text" id="first-name" name="first-name"placeholder="Entrez le prénom du patient">
     </div>
 
    <div class="line">
@@ -563,17 +563,21 @@ input[type="radio"]:checked {
   </div>
 </form>
 
+<div>
 <label for="physioNote">Notes générales</label>
         <textarea id="physioNote" rows="4" ></textarea>
-
-
+  </div>
+  
+<div>
+   
     <label for="exercise-opinion">Avis du physiothérapeute sur la poursuite du traitement</label>
     <select id="exercise-opinion" onchange="showResponse('exercise-opinion')">
       <option value="">Oui ou Non</option>
       <option value="oui">Oui</option>
       <option value="non">Non</option>
     </select>
-   
+     </div>
+ 
 
     <label for="evaluatorName">Nom du physiothérapeute </label>
         <select id="evaluatorName">
@@ -592,7 +596,7 @@ input[type="radio"]:checked {
             <option value="Téo Junge">Téo Junge</option>
             <option value="Yves Marinoni">Yves Marinoni</option>
         </select>
-
+  </div>
         <script>
  
 document.addEventListener("DOMContentLoaded", function() {
@@ -752,7 +756,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Afficher le bon graphique radar en fonction du thème
     document.getElementById("themeSelector").addEventListener("change", updateTheme);
 });
-
 
 
 function startApp() {
